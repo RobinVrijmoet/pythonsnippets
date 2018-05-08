@@ -7,6 +7,7 @@ year = 2018
 classrooms = ["WD.1.016","WD.1.003","WD.1.019","H.2.318","H.3.403","H.3.306","H.4.308","H.4.312","WD.1.022","WN.1.014"]
 lessons = ["SEN01","SEN02","ICTLAB","INFAN02","INFAN03","INF04","DSN01","SLC04","SCRT02","ATM3","ETC3","ADHD","FIFA","WOW2","COD3","LoLGG"]
 usernames = ["GIACF","COSTG","SCHMN","BUSAL","ABBAM","SALMG","MUILL","OMAR"]
+reservationid= 1;
 # dates = ["02-01-2018-"]
 def dayslotsunbooked():
     return {1:False,2:False,3:False,4:False,5:False,6:False,7:False,8:False,9:False,10:False,11:False,12:False,13:False,14:False,15:False}
@@ -48,7 +49,7 @@ for f in classrooms:
     classobjects.insert(len(classobjects),classroom(f))
 
 
-sql = "INSERT INTO [TABLENAME] (timeslotfrom,timeslotto,timefrom,timeto,date,username,lesson,room,weeknummer) VALUES "
+sql = "INSERT INTO [TABLENAME] (reservationid,timeslotfrom,timeslotto,timefrom,timeto,date,username,lesson,room,weeknummer) VALUES "
 currentweek = 1
 currentiteration = 1
 first = True;
@@ -71,10 +72,10 @@ while currentweek <= weeknumbers:
                 first = False
 
             room.schedule[randomday][randomtimeslot] = True
-            sql += "("+ str(randomtimeslot)+ ","+ str(randomtimeslot) + ",'"+\
-                   str((timeslots[randomtimeslot][0]))+"','"+str((timeslots[randomtimeslot][1]))+"','" + str(date)+"','"+randomteacher+"','"+randomlesson+"','"+room.classname+"',"+str(currentweek)+")"
+            sql += "(" + str(reservationid) + "," + str(randomtimeslot) + "," + str(randomtimeslot) + ",'" + \
+                   str((timeslots[randomtimeslot][0])) +"','" + str((timeslots[randomtimeslot][1])) +"','" + str(date) +"','" + randomteacher +"','" + randomlesson +"','" + room.classname +"'," + str(currentweek) +")"
             currentiteration += 1
-
+            reservationid += 1
 
     currentiteration = 1
     currentweek += 1
